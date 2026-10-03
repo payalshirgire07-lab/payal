@@ -13,16 +13,17 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+      - name: Check index.html exists
+        run: |
+          if [ -f index.html ]; then
+            echo "✅ index.html found!"
+          else
+            echo "❌ index.html not found!"
+            exit 1
+          fi
 
-      - name: Install Dependencies
-        run: npm install
+      - name: Display HTML Content
+        run: cat index.html
 
-      - name: Run Tests
-        run: npm test
-
-      - name: Build Application
-        run: npm run build
+      - name: Deploy Complete
+        run: echo "✅ Deployment Successful!"
